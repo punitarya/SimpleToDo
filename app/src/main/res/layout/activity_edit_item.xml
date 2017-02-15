@@ -10,24 +10,90 @@
     android:paddingTop="@dimen/activity_vertical_margin"
     tools:context="com.codepath.simpletodo.EditItemActivity">
 
+
+    <TextView
+        android:text="Task Name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_marginLeft="21dp"
+        android:layout_marginStart="21dp"
+        android:layout_marginTop="12dp"
+        android:id="@+id/txtTaskName"
+        tools:text="Task Name"
+        android:textAppearance="@style/TextAppearance.AppCompat.Widget.ActionBar.Title"
+         />
+
+    <TextView
+        android:text="Due Date"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/etTaskName"
+        android:layout_alignLeft="@+id/txtTaskName"
+        android:layout_alignStart="@+id/txtTaskName"
+        android:layout_marginTop="23dp"
+        android:id="@+id/txtDate"
+        android:textAppearance="@style/TextAppearance.AppCompat.Widget.ActionBar.Title"
+        />
+
     <EditText
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:inputType="textMultiLine"
         android:ems="10"
+        android:id="@+id/etTaskName"
         android:layout_alignParentTop="true"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
-        android:id="@+id/etEditItem"
-        android:text="Edit Item" />
+        android:layout_toRightOf="@+id/txtTaskName"
+        android:layout_toEndOf="@+id/txtTaskName"
+        android:layout_marginLeft="28dp"
+        android:layout_marginStart="28dp" />
+
+    <Button
+        android:text="Set Date"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/btnDatePicker"
+        android:onClick="onSetDate"
+        android:layout_alignBaseline="@+id/txtDate"
+        android:layout_alignBottom="@+id/txtDate"
+        android:layout_alignLeft="@+id/etTaskName"
+        android:layout_alignStart="@+id/etTaskName" />
 
     <Button
         android:text="Save"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/etEditItem"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
         android:id="@+id/btnSave"
-        android:onClick="onSave" />
+        android:onClick="onSave"
+        android:layout_below="@+id/etTaskNotes"
+        android:layout_alignLeft="@+id/txtTaskNotes"
+        android:layout_alignStart="@+id/txtTaskNotes"
+        android:layout_marginTop="47dp" />
+
+    <TextView
+        android:text="Notes"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/txtTaskNotes"
+        android:textAppearance="@style/TextAppearance.AppCompat.Widget.ActionBar.Title"
+        android:layout_alignBottom="@+id/etTaskNotes"
+        android:layout_alignLeft="@+id/txtDate"
+        android:layout_alignStart="@+id/txtDate"
+        android:layout_alignRight="@+id/txtDate"
+        android:layout_alignEnd="@+id/txtDate" />
+
+    <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:inputType="textMultiLine"
+        android:ems="10"
+        android:id="@+id/etTaskNotes"
+        android:layout_below="@+id/btnDatePicker"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true"
+        android:layout_marginTop="14dp"
+        android:layout_alignLeft="@+id/btnDatePicker"
+        android:layout_alignStart="@+id/btnDatePicker" />
 </RelativeLayout>
