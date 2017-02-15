@@ -59,7 +59,7 @@ public class ListViewAdapter extends BaseAdapter{
 
         TaskItem item = list.get(position);
         txtFirst.setText(item.getItemName());
-        txtSecond.setText(item.getItemDate());
+        txtSecond.setText(item.getItemPriority());
 
         return convertView;
     }

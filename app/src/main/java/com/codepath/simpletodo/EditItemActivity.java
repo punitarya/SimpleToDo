@@ -8,10 +8,13 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.DatePicker;
 import android.widget.EditText;
+import android.widget.Spinner;
 import android.widget.TextView;
+import android.widget.ArrayAdapter;
 
 import java.util.Calendar;
-
+import java.util.List;
+import java.util.ArrayList;
 /**
  * Activity for adding or editing an item
  */
@@ -20,7 +23,7 @@ public class EditItemActivity extends AppCompatActivity {
     EditText etName;
     TextView txtDate;
     EditText etNotes;
-
+    Spinner spPriority;
     Calendar calendar;
     private int year, month, day;
 
@@ -32,11 +35,22 @@ public class EditItemActivity extends AppCompatActivity {
         txtDate = (TextView) findViewById(R.id.txtDate);
         etNotes = (EditText) findViewById(R.id.etTaskNotes);
         actionType =ActionType.valueOf(getIntent().getStringExtra("actionType"));
+        spPriority = (Spinner) findViewById(R.id.spPriority);
+        List<String> list = new ArrayList<String>();
+        list.add(Priority.HIGH.toString());
+        list.add(Priority.MEDIUM.toString());
+        list.add(Priority.LOW.toString());
+
+        ArrayAdapter<String> dataAdapter = new ArrayAdapter<String>(this,
+                android.R.layout.simple_spinner_item, list);
+        dataAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        spPriority.setAdapter(dataAdapter);
 
         // read the intent
         String item = getIntent().getStringExtra("itemName");
         String date = getIntent().getStringExtra("itemDate");
         String notes = getIntent().getStringExtra("itemNotes");
+        String priority = getIntent().getStringExtra("itemPriority");
 
         calendar = Calendar.getInstance();
         year = calendar.get(Calendar.YEAR);
@@ -52,6 +66,10 @@ public class EditItemActivity extends AppCompatActivity {
             etName.setSelection(item.length());
             etNotes.setText(notes);
             txtDate.setText(date);
+            int pos=list.indexOf(priority);
+            if (pos >= 0) {
+                spPriority.setSelection(pos);
+            }
         }
 
     }
@@ -63,6 +81,8 @@ public class EditItemActivity extends AppCompatActivity {
         data.putExtra("itemName", etName.getText().toString());
         data.putExtra("itemDate", txtDate.getText().toString());
         data.putExtra("itemNotes", etNotes.getText().toString());
+        data.putExtra("itemPriority", spPriority.getSelectedItem().toString());
+
         data.putExtra("actionType", actionType.toString());
 
         // Activity finished ok, return the data

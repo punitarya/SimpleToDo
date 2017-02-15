@@ -61,17 +61,6 @@
         android:layout_alignLeft="@+id/etTaskName"
         android:layout_alignStart="@+id/etTaskName" />
 
-    <Button
-        android:text="Save"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/btnSave"
-        android:onClick="onSave"
-        android:layout_below="@+id/etTaskNotes"
-        android:layout_alignLeft="@+id/txtTaskNotes"
-        android:layout_alignStart="@+id/txtTaskNotes"
-        android:layout_marginTop="47dp" />
-
     <TextView
         android:text="Notes"
         android:layout_width="wrap_content"
@@ -96,4 +85,34 @@
         android:layout_marginTop="14dp"
         android:layout_alignLeft="@+id/btnDatePicker"
         android:layout_alignStart="@+id/btnDatePicker" />
+
+    <Button
+        android:text="Save"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/btnSave"
+        android:onClick="onSave"
+        android:layout_marginTop="40dp"
+        android:layout_below="@+id/txtPriority"
+        android:layout_alignLeft="@+id/txtTaskNotes"
+        android:layout_alignStart="@+id/txtTaskNotes" />
+
+    <Spinner
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignTop="@+id/txtPriority"
+        android:id="@+id/spPriority"
+        android:layout_alignLeft="@+id/etTaskNotes"
+        android:layout_alignStart="@+id/etTaskNotes" />
+
+    <TextView
+        android:text="Priority"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:id="@+id/txtPriority"
+        android:layout_below="@+id/txtTaskNotes"
+        android:textAppearance="@style/TextAppearance.AppCompat.Widget.ActionBar.Title"
+        android:layout_alignLeft="@+id/txtTaskNotes"
+        android:layout_alignStart="@+id/txtTaskNotes" />
 </RelativeLayout>

@@ -23,7 +23,7 @@ public class MainActivity extends AppCompatActivity {
     private ListViewAdapter itemsAdapter;
     private ListView lvlItems;
     private int selectedPosition;
-    private final String FILE_NAME = "todo.txt";
+    private final String FILE_NAME = "ToDo.txt";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -100,6 +100,8 @@ public class MainActivity extends AppCompatActivity {
             String item = data.getExtras().getString("itemName");
             String date = data.getExtras().getString("itemDate");
             String itemNotes = data.getExtras().getString("itemNotes");
+            String itemPriority = data.getExtras().getString("itemPriority");
+
             ActionType actionType = ActionType.valueOf(data.getExtras().getString("actionType"));
 
             TaskItem taskItem = null;
@@ -109,6 +111,7 @@ public class MainActivity extends AppCompatActivity {
                 taskItem.setItemName(item);
                 taskItem.setItemDate(date);
                 taskItem.setItemNotes(itemNotes);
+                taskItem.setItemPriority(itemPriority);
 
                 items.add(taskItem);
             } else {
@@ -117,6 +120,7 @@ public class MainActivity extends AppCompatActivity {
                 taskItem.setItemName(item);
                 taskItem.setItemDate(date);
                 taskItem.setItemNotes(itemNotes);
+                taskItem.setItemPriority(itemPriority);
                 items.set(selectedPosition, taskItem);
             }
 
@@ -137,6 +141,7 @@ public class MainActivity extends AppCompatActivity {
         String itemName = "";
         String itemDate = "";
         String itemNotes = "";
+        String itemPriority = "";
 
         // get the item
         if (actionType == ActionType.EDIT){
@@ -145,6 +150,8 @@ public class MainActivity extends AppCompatActivity {
             itemName = item.getItemName();
             itemDate = item.getItemDate();
             itemNotes = item.getItemNotes();
+            itemPriority = item.getItemPriority();
+
         }
 
         // set intent parameters
@@ -153,6 +160,7 @@ public class MainActivity extends AppCompatActivity {
         i.putExtra("itemName", itemName); // pass arbitrary data to launched activity
         i.putExtra("itemDate", itemDate); // pass arbitrary data to launched activity
         i.putExtra("itemNotes", itemNotes); // pass arbitrary data to launched activity
+        i.putExtra("itemPriority", itemPriority); // pass arbitrary data to launched activity
 
         startActivityForResult(i, REQUEST_CODE);
     }

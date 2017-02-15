@@ -11,6 +11,7 @@ public class TaskItem implements Serializable{
     private String itemName;
     private String itemDate;
     private String itemNotes;
+    private String itemPriority;
 
     public String getItemDate() {
         return itemDate;
@@ -34,5 +35,13 @@ public class TaskItem implements Serializable{
 
     public void setItemNotes(String itemNotes) {
         this.itemNotes = itemNotes;
+    }
+
+    public String getItemPriority() {
+        return itemPriority;
+    }
+
+    public void setItemPriority(String itemPriority) {
+        this.itemPriority = itemPriority;
     }
 }
