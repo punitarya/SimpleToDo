@@ -26,7 +26,7 @@ public class EditItemActivity extends AppCompatActivity {
     Spinner spPriority;
     Calendar calendar;
     private int year, month, day;
-
+    private final int SET_DATE_EVENT_ID = 999;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -36,6 +36,8 @@ public class EditItemActivity extends AppCompatActivity {
         etNotes = (EditText) findViewById(R.id.etTaskNotes);
         actionType =ActionType.valueOf(getIntent().getStringExtra("actionType"));
         spPriority = (Spinner) findViewById(R.id.spPriority);
+
+        // populate Item priority spinner list
         List<String> list = new ArrayList<String>();
         list.add(Priority.HIGH.toString());
         list.add(Priority.MEDIUM.toString());
@@ -82,7 +84,7 @@ public class EditItemActivity extends AppCompatActivity {
         data.putExtra("itemDate", txtDate.getText().toString());
         data.putExtra("itemNotes", etNotes.getText().toString());
         data.putExtra("itemPriority", spPriority.getSelectedItem().toString());
-
+        // Edit or ADD action
         data.putExtra("actionType", actionType.toString());
 
         // Activity finished ok, return the data
@@ -91,12 +93,11 @@ public class EditItemActivity extends AppCompatActivity {
     }
 
     public  void onSetDate(View v){
-        showDialog(999);
+        showDialog(SET_DATE_EVENT_ID);
     }
     @Override
     protected Dialog onCreateDialog(int id) {
-        // TODO Auto-generated method stub
-        if (id == 999) {
+        if (id == SET_DATE_EVENT_ID) {
             return new DatePickerDialog(this,
                     myDateListener, year, month, day);
         }
@@ -108,7 +109,7 @@ public class EditItemActivity extends AppCompatActivity {
                 @Override
                 public void onDateSet(DatePicker arg0,
                                       int arg1, int arg2, int arg3) {
-                    showDate(arg1, arg2+1, arg3);
+                    showDate(arg1, arg2 + 1, arg3);
                 }
             };
 

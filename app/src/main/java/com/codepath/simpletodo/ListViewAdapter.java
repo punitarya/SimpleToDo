@@ -2,6 +2,7 @@ package com.codepath.simpletodo;
 
 
 import android.app.Activity;
+import android.database.DataSetObserver;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -9,7 +10,6 @@ import android.widget.BaseAdapter;
 import android.widget.TextView;
 
 import java.util.List;
-
 /**
  * Created by puarya on 2/14/17.
  * Custom list view adapter
@@ -17,25 +17,23 @@ import java.util.List;
 
 public class ListViewAdapter extends BaseAdapter{
     public List<TaskItem> list;
-    Activity activity;
-    TextView txtFirst;
-    TextView txtSecond;
+    private Activity activity;
+    private TextView txtFirst;
+    private TextView txtSecond;
 
     public ListViewAdapter(Activity activity, List<TaskItem> list){
         super();
         this.activity=activity;
-        this.list=list;
+        this.list = list;
     }
 
     @Override
     public int getCount() {
-        // TODO Auto-generated method stub
         return list.size();
     }
 
     @Override
     public Object getItem(int position) {
-        // TODO Auto-generated method stub
         return list.get(position);
     }
 
@@ -64,6 +62,15 @@ public class ListViewAdapter extends BaseAdapter{
         return convertView;
     }
 
+    @Override
+    public void registerDataSetObserver(DataSetObserver observer) {
+        super.registerDataSetObserver(observer);
+    }
+
+    @Override
+    public void unregisterDataSetObserver(DataSetObserver observer) {
+        super.unregisterDataSetObserver(observer);
+    }
     public void updateList(List<TaskItem> taskItems) {
         list = taskItems;
         this.notifyDataSetChanged();

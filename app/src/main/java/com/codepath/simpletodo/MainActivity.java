@@ -16,10 +16,11 @@ import java.io.File;
 import java.io.IOException;
 import java.lang.reflect.Type;
 import java.util.ArrayList;
+import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
 
-    private ArrayList<TaskItem> items;
+    private List<TaskItem> items;
     private ListViewAdapter itemsAdapter;
     private ListView lvlItems;
     private int selectedPosition;
@@ -104,19 +105,14 @@ public class MainActivity extends AppCompatActivity {
 
             ActionType actionType = ActionType.valueOf(data.getExtras().getString("actionType"));
 
-            TaskItem taskItem = null;
             // item added
             if (actionType == ActionType.ADD) {
-                taskItem = new TaskItem();
-                taskItem.setItemName(item);
-                taskItem.setItemDate(date);
-                taskItem.setItemNotes(itemNotes);
-                taskItem.setItemPriority(itemPriority);
-
+                TaskItem taskItem = new TaskItem(item, date, itemNotes, itemPriority);
                 items.add(taskItem);
             } else {
                 // item updated
-                taskItem = items.get(selectedPosition);
+                TaskItem taskItem = items.get(selectedPosition);
+                //taskItem = new TaskItem();
                 taskItem.setItemName(item);
                 taskItem.setItemDate(date);
                 taskItem.setItemNotes(itemNotes);
@@ -127,6 +123,7 @@ public class MainActivity extends AppCompatActivity {
             // refresh list view
             itemsAdapter.updateList(items);
             lvlItems.invalidate();
+
             // update file
             writeItems();
         }
@@ -151,7 +148,6 @@ public class MainActivity extends AppCompatActivity {
             itemDate = item.getItemDate();
             itemNotes = item.getItemNotes();
             itemPriority = item.getItemPriority();
-
         }
 
         // set intent parameters
@@ -171,13 +167,17 @@ public class MainActivity extends AppCompatActivity {
     private void readItems(){
         File fileDir = getFilesDir();
         File todoFile = new File(fileDir, FILE_NAME);
+
+        items = new ArrayList<TaskItem>();
+
         try {
             final Gson gson = new Gson();
             String lines = FileUtils.readFileToString(todoFile);
 
             Type listType = new TypeToken<ArrayList<TaskItem>>(){}.getType();
             // read object
-            items = new Gson().fromJson(lines, listType);
+            List<TaskItem> itemList = new Gson().fromJson(lines, listType);
+            items.addAll(itemList);
 
         } catch (IOException ex){
             items = new ArrayList<TaskItem>();
